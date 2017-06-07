@@ -8,6 +8,7 @@ import os
 import cv2
 import signal
 
+#key delecrations 
 consumer_key = 'ZLVrCPU8If3vdWxJL1GxMuPnG'
 consumer_secret_key = 'dWtnkhkjO2JyoGFDmxLPFhi7GFFfhoyjnTJ4ebhif6h9RKZxIZ'
 access_key = '3317497801-iNe205MSOO7kcwLZTaaMk5SjDolbeR3T8EKiNmP'
@@ -29,32 +30,54 @@ def make_soup(url):
 	html = urlopen(url).read()
 	return BeautifulSoup(html)
 
+
 def downloading():
     soup = make_soup(url)
     images = [img for img in soup.findAll('img')]
     print(str(len(images)) + "images found.")
     print 'Downloading images to current working directory.'
     image_links = [each.get('src') for each in images]
+    count = 0
     for each in image_links:
-    	filename=each.split('/')[-1]
+    	if count == 10:
+        	break
+        else:
+        	count = count + 1
+        filename=each.split('/')[-1]
     	print filename
-    	try:
-    		urllib.urlretrieve(each, filename)
-    	except TimeoutException:
-    		break
-    return 
+        urllib.urlretrieve(each, filename)
+        
+    
 
 def uploadinganddelteting():
 	images = os.listdir(path)
+	count = 0
 	for f in images[:]:
-	   if f.endswith(".jpg"):
+	   if f.endswith(".jpg") or f.endswith(".png") or f.endswith(".gif"):
 	      print f;
-	      api.update_with_media(f);
+	      count = count + 1
 	      break
-
 	
+	if count == 0:
+		downloading()
+		images = os.listdir(path)
+		for f in images[:]:
+			if f.endswith(".jpg") or f.endswith(".png") or f.endswith(".gif"):
+				api.update_with_media(f);
+				os.remove(path+'/'+f)
+				print "done"
+				break
+	else:
+		for f in  images[:]:
+			if f.endswith(".jpg") or f.endswith(".png") or f.endswith(".gif"):
+				api.update_with_media(f);
+				os.remove(path+'/'+f)
+				print "done"
+				break
 
-#downloading()
+
+
+
 uploadinganddelteting()
 
-print api	
+	
