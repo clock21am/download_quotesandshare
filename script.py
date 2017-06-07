@@ -1,4 +1,4 @@
-#!usr/bin/python
+ #!usr/bin/python
 
 import tweepy
 from bs4 import BeautifulSoup
@@ -9,10 +9,10 @@ import cv2
 import signal
 
 #key delecrations 
-consumer_key = 'ZLVrCPU8If3vdWxJL1GxMuPnG'
-consumer_secret_key = 'dWtnkhkjO2JyoGFDmxLPFhi7GFFfhoyjnTJ4ebhif6h9RKZxIZ'
-access_key = '3317497801-iNe205MSOO7kcwLZTaaMk5SjDolbeR3T8EKiNmP'
-access_key_secret = 'sNuDvxBcp9kAqvxE1N3nYRxldo3gdt59Rp6Otyg2fD0qs'
+consumer_key = ''
+consumer_secret_key = ''
+access_key = ''
+access_key_secret = ''
 url = 'http://www.wookmark.com'
 path = '/home/bugeater/Documents/Jugnoo/download_quotesandshare'
 
